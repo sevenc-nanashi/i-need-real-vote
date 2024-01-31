@@ -1,0 +1,9 @@
+- matches:
+    - https://twitter.com/*
+    - https://www.twitter.com/*
+    - https://x.com/*
+  id: twitter
+- matches:
+    - https://youtube.com/*
+    - https://www.youtube.com/*
+  id: youtube

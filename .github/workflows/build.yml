@@ -1,0 +1,52 @@
+name: Build on Tag push
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.16.0
+      - name: Install
+        run: |
+          pnpm install
+
+      - name: Build
+        run: |
+          pnpm build
+      - name: Deploy to Releases
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            dist/pack/*.zip
+            dist/i-need-real-vote.user.js
+          tag_name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+      - name: Deploy to Release branch
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          cp dist/xttps.user.js /tmp/xttps.user.js
+          git fetch origin release
+          git switch release
+          cp /tmp/xttps.user.js xttps.user.js
+          if [[ -z $(git status -s) ]]; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git add i-need-real-vote.user.js
+          git commit -m "Update: ${{ github.sha }}"
+          git push origin release
