@@ -4,9 +4,9 @@
 
 ## 対応サイト
 
-- Twitter（新X）
+- Twitter（新X）\
   ![](./static/demo_tw.png)
-- YouTube
+- YouTube\
   ![](./static/demo_yt.png)
 
 ## 使い方
@@ -24,7 +24,7 @@ https://raw.githubusercontent.com/sevenc-nanashi/i-need-real-vote/release/i-need
 
 ### Userscripts
 
-上のURLを開き、`あぁ`ボタンの`</> Userscripts`をタップ/クリックします。/
+上のURLを開き、`あぁ`ボタンの`</> Userscripts`をタップ/クリックします。\
 その後、`Userscript detected. Click (Tap) to Install.`をタップ/クリックします。
 
 ## 開発
